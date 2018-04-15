@@ -37,7 +37,7 @@ app.get('/searching',function(req,res) {
 		} else {
 			console.log('name',this.req.body.name)
 			if (req.body.name === data.name) {
-				//console.log(data)
+				
 			res.json(data);
 			}
 			

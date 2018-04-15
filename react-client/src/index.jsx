@@ -10,8 +10,10 @@ class App extends React.Component {
       obj: {
       oldAuthor: "",
       newAuthor:"",
-      books: ""
-    }
+      books: "",
+      
+    },
+    shown: ""
     }
 
     this.onChange=this.onChange.bind(this)
@@ -41,40 +43,7 @@ class App extends React.Component {
     obj[x] = e.target.value
     this.setState({obj : obj });
   }
-
-  // search() {
-  //   //this.props.onSearch(this.state.author); 
-  // //   this.state.obj.find({},function(err,Authors) {
-  // //   if (this.state.obj.oldAuthor === this.state.obj.newAuthor) {
-  // //     return res.send(this.state.obj.books)
-  // //   }
-  // // })
-  //   $.ajax({
-  //     url: '/searching', 
-  //     type: 'POST',
-  //     data: this.state.obj,
-  //     success: (data) => {
-        
-  //         //console.log(data)
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-
-  //      $.ajax({
-  //     url: '/searching', 
-  //     type: 'GET',
-  //     success: (data) => {
-  //       this.setState({obj : data })
-  //       console.log('this.state.obj')
-  //     },
-  //     error: (err) => {
-  //     //  console.log('err', err);
-  //     }
-  //   });
-      
-  // }
+  
 search() {
   var that=this;
    $.ajax({
@@ -82,27 +51,11 @@ search() {
       type: 'POST',
       data: this.state.obj,
       success: (data) => {
-        this.fetch(data)
-        that.setState({obj:data[0]})
-          console.log(data)
+        that.setState({shown:data[0].books})
+          console.log(that.state.shown)
       },
       error: (err) => {
         console.log('err sadsa', err);
-      }
-    });
-}
-fetch(data) {
- // console.log(data)
-      $.ajax({
-      url: '/searching', 
-      type: 'GET',
-      success: (data) => {
-        console.log(data)
-        this.setState({obj : data })
-        //console.log(this.state.obj)
-      },
-      error: (err) => {
-      //  console.log('err', err);
       }
     });
 }
@@ -118,11 +71,11 @@ fetch(data) {
       <p> <font size="5"> Add An Author </font></p>
       <input value={this.state.newAuthor} onChange={this.onChange.bind(this, 'newAuthor')}/> <br></br> <br></br>
       <p> <font size="5"> Add His Book! </font></p>
-      <input value={this.state.books} onChange={this.onChange.bind(this, 'books')}/> <br></br> <br></br>
+      <input value={this.state.books} onChange={this.onChange.bind(this,'books')}/> <br></br> <br></br>
        <button id="but" onClick={this.add}> Add To The List </button>
        <br></br> <br></br>
 
-       <div>{this.state.obj.books}</div>
+       <div>{this.state.shown}</div>
 
     </div>)
   }
