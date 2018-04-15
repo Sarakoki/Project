@@ -35,7 +35,7 @@ app.get('/searching',function(req,res) {
 		if (err) {
 			res.sendStatus(500);
 		} else {
-			console.log('name',this.req.body.name)
+			//console.log('name',this.req.body.name)
 			if (req.body.name === data.name) {
 				
 			res.json(data);
